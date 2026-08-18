@@ -35,11 +35,5 @@ export 'services/firebase_service.dart';
 // Theme
 export 'theme/app_theme_base.dart';
 
-// クロスプロモーション（他アプリ紹介）— 実装は cross_promo_kit（ポートフォリオ全体の共通パッケージ）
-// に一本化されている。kokugo-kore モノレポ内では shared_core がそれを再エクスポートしていたが、
-// cross_promo_kit はまだ独立したgitリポジトリとして切り出されておらず（kokugo-kore内の
-// packages/cross_promo_kit への相対path依存だったため）、このパッケージを単体で
-// 自己完結させるにあたり本エクスポートは一旦コメントアウトしている。
-// cross_promo_kit が独立リポジトリ化され次第、pubspec.yaml に git dependency として追加し、
-// 下記exportを復活させること。
-// export 'package:cross_promo_kit/cross_promo_kit.dart';
+// クロスプロモーション（他アプリ紹介）— 実装は cross_promo_kit（ポートフォリオ全体の共通パッケージ）に一本化。
+export 'package:cross_promo_kit/cross_promo_kit.dart';
