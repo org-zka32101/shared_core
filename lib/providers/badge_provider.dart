@@ -12,6 +12,8 @@ class BadgeCheckParams {
   final int maxStageCleared;
   final int perfectStageCount;
   final bool justPerfect;
+  final int maxCharacterLevel;    // 全キャラクター中の最高レベル
+  final int charactersAtMaxLevel; // MAXレベルに到達したキャラクター数
 
   const BadgeCheckParams({
     required this.streakDays,
@@ -20,6 +22,8 @@ class BadgeCheckParams {
     required this.maxStageCleared,
     required this.perfectStageCount,
     required this.justPerfect,
+    this.maxCharacterLevel = 0,
+    this.charactersAtMaxLevel = 0,
   });
 }
 
@@ -88,7 +92,9 @@ class BadgeNotifier extends Notifier<BadgeState> {
         BadgeCategory.writing  => p.totalPrimaryCorrect >= badge.requiredCount,
         BadgeCategory.grammar  => p.totalSecondaryCorrect >= badge.requiredCount,
         BadgeCategory.vocab    => p.totalPrimaryCorrect >= badge.requiredCount,
-        BadgeCategory.character => p.maxStageCleared >= badge.requiredCount,
+        BadgeCategory.character => badge.id == 'character_max_all'
+            ? p.charactersAtMaxLevel >= badge.requiredCount
+            : p.maxCharacterLevel >= badge.requiredCount,
       };
 
       if (earned) {
