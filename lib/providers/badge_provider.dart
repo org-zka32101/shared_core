@@ -14,6 +14,8 @@ class BadgeCheckParams {
   final bool justPerfect;
   final int maxCharacterLevel;    // 全キャラクター中の最高レベル
   final int charactersAtMaxLevel; // MAXレベルに到達したキャラクター数
+  final int predictionRate;       // 理科コレ専用: 予想的中率（%, 0-100）
+  final int troubleshootCorrect;  // 理科コレ専用: トラブルシューティング正解数
 
   const BadgeCheckParams({
     required this.streakDays,
@@ -24,6 +26,8 @@ class BadgeCheckParams {
     required this.justPerfect,
     this.maxCharacterLevel = 0,
     this.charactersAtMaxLevel = 0,
+    this.predictionRate = 0,
+    this.troubleshootCorrect = 0,
   });
 }
 
@@ -95,6 +99,9 @@ class BadgeNotifier extends Notifier<BadgeState> {
         BadgeCategory.character => badge.id == 'character_max_all'
             ? p.charactersAtMaxLevel >= badge.requiredCount
             : p.maxCharacterLevel >= badge.requiredCount,
+        // 理科コレ専用カテゴリ
+        BadgeCategory.prediction   => p.predictionRate >= badge.requiredCount,
+        BadgeCategory.troubleshoot => p.troubleshootCorrect >= badge.requiredCount,
       };
 
       if (earned) {

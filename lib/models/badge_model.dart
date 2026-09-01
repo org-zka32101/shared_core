@@ -1,7 +1,7 @@
 // 小学コレシリーズ共通バッジシステム
 // 全教科で共有可能な統一バッジモデル
 
-enum BadgeCategory { streak, score, content1, content2, special, kanji, reading, writing, grammar, vocab, character }
+enum BadgeCategory { streak, score, content1, content2, special, kanji, reading, writing, grammar, vocab, character, prediction, troubleshoot }
 
 class BadgeModel {
   final String id;
@@ -235,6 +235,24 @@ const allBadges = [
     emoji: '⭐',
     category: BadgeCategory.character,
     requiredCount: 1,
+  ),
+
+  // ─── Science Category（理科コレ専用）───
+  BadgeModel(
+    id: 'prediction_master',
+    title: 'よそう名人',
+    description: '予想的中率が90%以上！',
+    emoji: '🔮',
+    category: BadgeCategory.prediction,
+    requiredCount: 90,
+  ),
+  BadgeModel(
+    id: 'troubleshoot_detective',
+    title: 'ラボたんてい',
+    description: 'トラブルシューティングで失敗原因を3個発見',
+    emoji: '🕵️',
+    category: BadgeCategory.troubleshoot,
+    requiredCount: 3,
   ),
 
   // ─── Special Category ───
